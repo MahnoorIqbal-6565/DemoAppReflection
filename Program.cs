@@ -13,6 +13,7 @@ namespace ReflectionExample
             Console.WriteLine($"Class Name:{type.Name}\n\n");
 
             //Displaying for Constructors
+
             Console.WriteLine("Constructors");
             ConstructorInfo[] constructors = type.GetConstructors();
             foreach (ConstructorInfo constructor in constructors)
@@ -22,7 +23,7 @@ namespace ReflectionExample
             Console.WriteLine();
 
 
-            //Display metadata of utilizinhg the correct metadata the reflection method
+            //Display metadata of utilizing the correct metadata the reflection method
            
             Console.WriteLine("Properties");
             PropertyInfo[] properties=type.GetProperties();
@@ -32,15 +33,23 @@ namespace ReflectionExample
             }
             Console.WriteLine();
 
-            //Display snout the metadata of the daya
+            //Display snout the metadata of the data
+
             Console.WriteLine("Methods");
 
             MethodInfo[] methods = type.GetMethods();
             foreach(MethodInfo method in methods)
             {
                 Console.WriteLine(method.Name);
+                ParameterInfo[] parameters = method.GetParameters();
+                foreach(ParameterInfo parameter in parameters)
+                {
+                    Console.WriteLine(parameter.Name, parameter.ParameterType);
+                }
             }
             Console.WriteLine();
+
+            
         }
     }
 
