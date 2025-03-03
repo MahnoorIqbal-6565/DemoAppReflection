@@ -10,8 +10,7 @@ namespace ReflectionExample
         {
          
             Type type =typeof(SampleClass);
-
-            Console.WriteLine($"Class Name: {type.Name}\n");
+            Console.WriteLine($"Class Name:{type.Name}\n\n");
 
             //Displaying for Constructors
             Console.WriteLine("Constructors");
@@ -22,17 +21,20 @@ namespace ReflectionExample
             }
             Console.WriteLine();
 
-            //Display Properties
+
+            //Display metadata of utilizinhg the correct metadata the reflection method
+           
             Console.WriteLine("Properties");
-            PropertyInfo[] properties = type.GetProperties();
+            PropertyInfo[] properties=type.GetProperties();
             foreach (PropertyInfo property in properties)
             {
                 Console.WriteLine(property.Name);
             }
             Console.WriteLine();
 
-            //Display metadata of utilizinhg the correct metadata the reflection method
+            //Display snout the metadata of the daya
             Console.WriteLine("Methods");
+
             MethodInfo[] methods = type.GetMethods();
             foreach(MethodInfo method in methods)
             {
