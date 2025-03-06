@@ -8,51 +8,32 @@ namespace ReflectionExample
     {
         static void Main(string[] args)
         {
-         
-            Type type =typeof(SampleClass);
-            Console.WriteLine($"Class Name:{type.Name}\n\n");
+            // Using Reflection
+            Type type = typeof(SampleClass);
+            object instance = Activator.CreateInstance(type);
+        
+            MethodInfo method = type.GetMethod("LoadData");
 
-            //Displaying for Constructors
-
-            Console.WriteLine("Constructors");
-            ConstructorInfo[] constructors = type.GetConstructors();
-            foreach (ConstructorInfo constructor in constructors)
+            if (method != null)
             {
-                Console.WriteLine(constructor);
+                
+                method.Invoke(instance, new object[] { 1 });
             }
-            Console.WriteLine();
 
+            MethodInfo getDataMethod = type.GetMethod("GetData");
 
-            //Display metadata of utilizing the correct metadata the reflection method
-           
-            Console.WriteLine("Properties");
-            PropertyInfo[] properties=type.GetProperties();
-            foreach (PropertyInfo property in properties)
+            if (getDataMethod != null)
             {
-                Console.WriteLine(property.Name);
+                string result = (string)getDataMethod.Invoke(instance, null);
+                Console.WriteLine($"[Reflection Call] Data: {result}");
             }
-            Console.WriteLine();
 
-            //Display snout the metadata of the data
-
-            Console.WriteLine("Methods");
-
-            MethodInfo[] methods = type.GetMethods();
-            foreach(MethodInfo method in methods)
-            {
-                Console.WriteLine(method.Name);
-                ParameterInfo[] parameters = method.GetParameters();
-                foreach(ParameterInfo parameter in parameters)
-                {
-                    Console.WriteLine(parameter.Name, parameter.ParameterType);
-                }
-            }
-            Console.WriteLine();
-
-            
+            //Using Object call
+            SampleClass obj = new SampleClass();
+            obj.LoadData(1);
+            string result1 = obj.GetData();
+            Console.WriteLine($"[Direct Call] Data: {result1}");
         }
+
     }
-
-
 }
-
